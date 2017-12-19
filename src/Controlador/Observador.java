@@ -65,7 +65,9 @@ public class Observador implements ActionListener, MouseListener {
         btnEliminarPeli,
         btnVolverElimPeli,
         btnBuscarPeli,
-        btnVolverAgregar
+        btnVolverAgregar,
+        btnAgregaDrama,
+        
         
 
     }
@@ -132,7 +134,9 @@ public class Observador implements ActionListener, MouseListener {
         this.agregar_peli.guardar_peli.setActionCommand("btnGuardarPeli");
         this.agregar_peli.guardar_peli.addActionListener(this);
         this.agregar_peli.btnVolver.setActionCommand("btnVolverAgregar");
-        this.agregar_peli.btnVolver.addActionListener(this);        
+        this.agregar_peli.btnVolver.addActionListener(this); 
+        this.agregar_peli.btn_agregarDrama.setActionCommand("btnAgregaDrama");
+        this.agregar_peli.btn_agregarDrama.addActionListener(this);
         this.elim_peli.btn_elim.setActionCommand("btnEliminarPeli");
         this.elim_peli.btn_elim.addActionListener(this);
         this.elim_peli.btn_volver.setActionCommand("btnVolverElimPeli");
@@ -256,6 +260,24 @@ public class Observador implements ActionListener, MouseListener {
                     JOptionPane.showMessageDialog(null, "El código debe ser entre 10000 y 99999!");
                 }
                 break;
+            
+            case btnAgregaDrama:
+                String cat = "Drama";
+                
+                int cod;
+                cod = Integer.parseInt(this.agregar_peli.tf_cod.getText());
+                
+                String nom;
+                nom = (this.agregar_peli.tf_nom.getText());
+                
+                int price;
+                price = Integer.parseInt(this.agregar_peli.tf_price.getText());
+                
+                String formato;
+                formato = ( this.agregar_peli.formato.getSelectedItem().toString());
+                
+            break;
+                    
             case btnEliminarPeli:
                 if (this.peli.buscarPeli(Integer.parseInt(this.elim_peli.tf_elim.getText()))) {
                     if (this.peli.eliminarPeli(Integer.parseInt(this.elim_peli.tf_elim.getText()))) {
