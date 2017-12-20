@@ -262,19 +262,27 @@ public class Observador implements ActionListener, MouseListener {
                 break;
             
             case btnAgregaDrama:
-                String cat = "Drama";
-                
+                int cat = 2;
                 int cod;
                 cod = Integer.parseInt(this.agregar_peli.tf_cod.getText());
-                
                 String nom;
                 nom = (this.agregar_peli.tf_nom.getText());
-                
                 int price;
                 price = Integer.parseInt(this.agregar_peli.tf_price.getText());
-                
                 String formato;
-                formato = ( this.agregar_peli.formato.getSelectedItem().toString());
+                formato = (this.agregar_peli.formato.getSelectedItem().toString());
+                
+                //LLAMO AL MÉTODO GUARDAR PELI
+                if(this.peli.guardarPeli(cod,price,cat,formato,nom)){
+                    JOptionPane.showMessageDialog(null, "Pelicula agregada correctamente");
+                    //Limpia campos de texto
+                    this.agregar_peli.tf_cod.setText("");
+                    this.agregar_peli.tf_nom.setText("");
+                    this.agregar_peli.tf_price.setText("");
+                    this.agregar_peli.formato.setSelectedItem("");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Pelicula no agregada");
+                }
                 
             break;
                     
@@ -293,19 +301,19 @@ public class Observador implements ActionListener, MouseListener {
             case btnBuscarPeli:
                 if (this.peli.buscarPeli(Integer.parseInt(this.buscar_peli.tf_buscar.getText()))) {
                     int precio = 0;
-                    int cat = 0;
-                    String formato, nom;
+                    //int cat = 0;
+                    //String formato, nom;
                     int code = Integer.parseInt(this.buscar_peli.tf_buscar.getText());                    
                     
                     precio = this.peli.buscarPorCodigo(code).get(0).getPrecio();
-                    cat = this.peli.buscarPorCodigo(code).get(0).getId_categoria();
+                    //cat = this.peli.buscarPorCodigo(code).get(0).getId_categoria();
                     formato = this.peli.buscarPorCodigo(code).get(0).getFormato4k();
                     nom = this.peli.buscarPorCodigo(code).get(0).getFormato4k();
                     String p = Integer.toString(precio);
 
                     this.buscar_peli.tf_nom.setText(nom);
                     this.buscar_peli.tf_prc.setText(p);
-                    this.buscar_peli.jComboBox1.setSelectedItem(cat);
+                    //this.buscar_peli.jComboBox1.setSelectedItem(cat);
                     this.buscar_peli.jComboBox2.setSelectedItem(formato);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró un registro!");
