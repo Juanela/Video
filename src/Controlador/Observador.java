@@ -364,6 +364,15 @@ public class Observador implements ActionListener, MouseListener {
                 this.vista_listar_rom.setVisible(true);                
                 this.vista_listar_rom.jt_romance.setModel(this.peli.ListadoPeliRom());
                 break;
+            //Se agrega funcionalidad a btn_elim_precio    
+            case btn_elim_precio:
+                if (this.peli.eliminar_por_precio()) {
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado la película cuyo precio es superior a 2 mil");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar la película");
+                }                
+                break;
+    
 
         }
     }

@@ -251,5 +251,22 @@ public class Pelicula {
         }
         return tablemodel;
     }
-    
+    public static boolean eliminar_por_precio() {
+        PreparedStatement borrar;
+        try {
+            Connection cnx7 = Conexion.getConexion();
+            String query = "DELETE FROM pelicula WHERE precio >2000";
+            borrar = cnx7.prepareStatement(query);
+            borrar.executeUpdate();
+            borrar.close();           
+            cnx7.close();
+            return true;
+        } catch (SQLException s) {
+            System.out.println("Error SQL al eliminar" + s.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error al eliminar" + e.getMessage());
+            return false;
+        }    
+    }
 }
