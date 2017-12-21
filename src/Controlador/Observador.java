@@ -303,8 +303,7 @@ public class Observador implements ActionListener, MouseListener {
                     this.agregar_peli.tf_nom.setText("");
                     this.agregar_peli.tf_price.setText("");
                     this.agregar_peli.formato.setSelectedIndex(0);
-                    this.agregar_peli.categoria.setSelectedIndex(0);
-                    
+                    this.agregar_peli.categoria.setSelectedIndex(0);                    
                 break;
             case btnEliminarPeli:
                 if (this.peli.buscarPeli(Integer.parseInt(this.elim_peli.tf_elim.getText()))) {
