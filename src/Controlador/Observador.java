@@ -263,6 +263,10 @@ public class Observador implements ActionListener, MouseListener {
                 this.agregar_peli.setVisible(false);
                 this.vistaPrincipal.setVisible(true);
                 break;
+            case btn_vista_nueva:
+                this.vistaNew.setVisible(true);
+                this.vistaPrincipal.setVisible(false);
+                break;      
             case btnGuardarPeli:
                 //Enviamos datos del formulario Ingresar producto a metodo nuevoProducto
                 if (Integer.parseInt(this.agregar_peli.tf_cod.getText()) >= 10000 && Integer.parseInt(this.agregar_peli.tf_cod.getText()) <= 99999) {
@@ -339,16 +343,14 @@ public class Observador implements ActionListener, MouseListener {
                 }
                 //Éstos son los nuevos botones de la Vista_nueva 
                 case btn_cat_drama:
-                    if (this.peli.guardarPeli(12500,10990,3,"si","película agregada a drama")){
+                    if (this.peli.guardarPeli(12500,10990,3,"si","Titanic")){
                         JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría drama");
-                    
                     }else{
                     JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
                     }
                 case btn_cat_comedia:
-                    if (this.peli.guardarPeli(223424,5990,4,"si","película agregada a comedia")){
+                    if (this.peli.guardarPeli(223424,5990,4,"si","Loc por Mery")){
                         JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría comedia");
-                    
                     }else{
                     JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
                     }
