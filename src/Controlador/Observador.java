@@ -372,7 +372,13 @@ public class Observador implements ActionListener, MouseListener {
                     JOptionPane.showMessageDialog(null, "No se pudo eliminar la película");
                 }                
                 break;
-    
+            case btn_mod_nom:
+                if (this.peli.modifica_nombre_peli()) {
+                    JOptionPane.showMessageDialog(null, "Se ha modificado el nombre para todas las pelis");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo modificar");
+                }
+                break;
 
         }
     }

@@ -269,4 +269,23 @@ public class Pelicula {
             return false;
         }    
     }
+    
+    public static boolean modifica_nombre_peli() {
+        PreparedStatement borrar;
+        try {
+            Connection cnx8 = Conexion.getConexion();
+            String query = "UPDATE pelicula SET nombre = concat('P',nombre)";
+            borrar = cnx8.prepareStatement(query);
+            borrar.executeUpdate();
+            borrar.close();           
+            cnx8.close();
+            return true;
+        } catch (SQLException s) {
+            System.out.println("Error SQL al eliminar" + s.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error al eliminar" + e.getMessage());
+            return false;
+        }    
+    }
 }
