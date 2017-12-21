@@ -90,7 +90,7 @@ public class Vista_agregar_cat extends javax.swing.JFrame {
                     .addComponent(agrega_cat)
                     .addComponent(btn_limpiar_cat)
                     .addComponent(btnVolverCat))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();

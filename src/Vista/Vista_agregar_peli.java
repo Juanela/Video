@@ -40,7 +40,7 @@ public class Vista_agregar_peli extends javax.swing.JFrame {
         formato = new javax.swing.JComboBox<>();
         guardar_peli = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        btn_agregarDrama = new javax.swing.JButton();
+        btn_clean_casilla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,10 +63,10 @@ public class Vista_agregar_peli extends javax.swing.JFrame {
 
         btnVolver.setText("Volver");
 
-        btn_agregarDrama.setText("Agregar a género Drama");
-        btn_agregarDrama.addActionListener(new java.awt.event.ActionListener() {
+        btn_clean_casilla.setText("Limpiar");
+        btn_clean_casilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarDramaActionPerformed(evt);
+                btn_clean_casillaActionPerformed(evt);
             }
         });
 
@@ -75,35 +75,33 @@ public class Vista_agregar_peli extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_cod)
-                                    .addComponent(tf_nom)
-                                    .addComponent(tf_price)
-                                    .addComponent(categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(formato, 0, 160, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(guardar_peli)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                                .addComponent(btnVolver)
-                                .addGap(44, 44, 44)
-                                .addComponent(btn_agregarDrama)))))
-                .addGap(37, 37, 37))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_cod)
+                    .addComponent(tf_nom)
+                    .addComponent(tf_price)
+                    .addComponent(categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(formato, 0, 160, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(guardar_peli)
+                .addGap(28, 28, 28)
+                .addComponent(btn_clean_casilla)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(btnVolver)
+                .addGap(36, 36, 36))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,20 +128,20 @@ public class Vista_agregar_peli extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(formato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar_peli)
                     .addComponent(btnVolver)
-                    .addComponent(btn_agregarDrama))
-                .addGap(40, 40, 40))
+                    .addComponent(btn_clean_casilla))
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_agregarDramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarDramaActionPerformed
+    private void btn_clean_casillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clean_casillaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_agregarDramaActionPerformed
+    }//GEN-LAST:event_btn_clean_casillaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +181,7 @@ public class Vista_agregar_peli extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnVolver;
-    public javax.swing.JButton btn_agregarDrama;
+    public javax.swing.JButton btn_clean_casilla;
     public javax.swing.JComboBox<String> categoria;
     public javax.swing.JComboBox<String> formato;
     public javax.swing.JButton guardar_peli;

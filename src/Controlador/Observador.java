@@ -25,6 +25,7 @@ import Vista.Vista_listar_peli;
 
 import Vista.Vista_agregar_cat;
 import Vista.Vista_listar_cat;
+import Vista.Vista_nueva;
 import java.util.ArrayList;
 
 /**
@@ -42,6 +43,8 @@ public class Observador implements ActionListener, MouseListener {
 
     private Vista_agregar_cat agregar_cat = new Vista_agregar_cat();
     private Vista_listar_cat listar_cat = new Vista_listar_cat();
+    
+    private Vista_nueva vistaNew = new Vista_nueva();
 
     //modelo
     private Pelicula peli = new Pelicula();
@@ -67,7 +70,15 @@ public class Observador implements ActionListener, MouseListener {
         btnBuscarPeli,
         btnVolverAgregar,
         btnAgregaDrama,
-        
+        //De aquí en adelante se agregan los botones de la Vista_nueva
+        btn_vista_nueva,
+        btn_cat_drama,
+        btn_cat_comedia,
+        btn_list_romance,
+        btn_elim_precio,
+        btn_mod_nom,
+        //Aquí está el nuevo botón creado para la Vista_agregar_peli
+        btn_clean_casilla,
         
 
     }
@@ -92,6 +103,8 @@ public class Observador implements ActionListener, MouseListener {
             SwingUtilities.updateComponentTreeUI(this.listar_peli);
             SwingUtilities.updateComponentTreeUI(this.agregar_cat);
             SwingUtilities.updateComponentTreeUI(this.listar_cat);
+            //Se agregó la Vista_nueva al Inicio(menú principal en jmenú2, menu_vista_nueva) 
+            SwingUtilities.updateComponentTreeUI(this.vistaNew);
 
             this.vistaPrincipal.setLocationRelativeTo(null);
             this.vistaPrincipal.setTitle("Video-Buster");
@@ -119,6 +132,13 @@ public class Observador implements ActionListener, MouseListener {
 
         this.vistaPrincipal.menu_salir.setActionCommand("btnSalir");
         this.vistaPrincipal.menu_salir.addActionListener(this);
+        this.vistaPrincipal.menu_vista_nueva.setActionCommand("btnSalir");
+        this.vistaPrincipal.menu_vista_nueva.addActionListener(this);
+        
+        //Escuchamos el nuevo el nuevo botón para la Vista_nueva
+        this.vistaPrincipal.menu_vista_nueva.setActionCommand("btn_vista_nueva");
+        this.vistaPrincipal.menu_vista_nueva.addActionListener(this);
+        
 
         this.agregar_cat.agrega_cat.setActionCommand("btnGuardarCat");
         this.agregar_cat.agrega_cat.addActionListener(this);
@@ -135,14 +155,30 @@ public class Observador implements ActionListener, MouseListener {
         this.agregar_peli.guardar_peli.addActionListener(this);
         this.agregar_peli.btnVolver.setActionCommand("btnVolverAgregar");
         this.agregar_peli.btnVolver.addActionListener(this); 
-        this.agregar_peli.btn_agregarDrama.setActionCommand("btnAgregaDrama");
-        this.agregar_peli.btn_agregarDrama.addActionListener(this);
+        this.agregar_peli.btn_clean_casilla.setActionCommand("btnAgregaDrama");
+        this.agregar_peli.btn_clean_casilla.addActionListener(this);
         this.elim_peli.btn_elim.setActionCommand("btnEliminarPeli");
         this.elim_peli.btn_elim.addActionListener(this);
         this.elim_peli.btn_volver.setActionCommand("btnVolverElimPeli");
         this.elim_peli.btn_volver.addActionListener(this);
         this.buscar_peli.btnBuscar.setActionCommand("btnBuscarPeli");
         this.buscar_peli.btnBuscar.addActionListener(this);
+        
+        //Escuhamos los nuevos botones creados para la Vista_nueva
+        this.vistaNew.btn_cat_drama.setActionCommand("btn_cat_drama");
+        this.vistaNew.btn_cat_drama.addActionListener(this);
+        this.vistaNew.btn_cat_comedia.setActionCommand("btn_cat_comedia");
+        this.vistaNew.btn_cat_comedia.addActionListener(this);
+        this.vistaNew.btn_list_romance.setActionCommand("btn_list_romance");
+        this.vistaNew.btn_list_romance.addActionListener(this);
+        this.vistaNew.btn_elim_precio.setActionCommand("btn_elim_precio");
+        this.vistaNew.btn_elim_precio.addActionListener(this);
+        this.vistaNew.btn_mod_nom.setActionCommand("btn_mod_nom");
+        this.vistaNew.btn_mod_nom.addActionListener(this);
+        //Escuhamos el nuevo botón creados en la Vista_agregar_peli
+        this.agregar_peli.btn_clean_casilla.setActionCommand("btn_clean_casilla");
+        this.agregar_peli.btn_clean_casilla.addActionListener(this);
+            
     }
 
     @Override
@@ -261,31 +297,13 @@ public class Observador implements ActionListener, MouseListener {
                 }
                 break;
             
-            case btnAgregaDrama:
-                int cat = 2;
-                int cod;
-                cod = Integer.parseInt(this.agregar_peli.tf_cod.getText());
-                String nom;
-                nom = (this.agregar_peli.tf_nom.getText());
-                int price;
-                price = Integer.parseInt(this.agregar_peli.tf_price.getText());
-                String formato;
-                formato = (this.agregar_peli.formato.getSelectedItem().toString());
-                
-                //LLAMO AL MÉTODO GUARDAR PELI
-                if(this.peli.guardarPeli(cod,price,cat,formato,nom)){
-                    JOptionPane.showMessageDialog(null, "Pelicula agregada correctamente");
-                    //Limpia campos de texto
+            //Este es el nuevo botón "Limpiar casilla" de la Vista_agregar_peli 
+                case btn_clean_casilla:
                     this.agregar_peli.tf_cod.setText("");
                     this.agregar_peli.tf_nom.setText("");
                     this.agregar_peli.tf_price.setText("");
                     this.agregar_peli.formato.setSelectedItem("");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Pelicula no agregada");
-                }
-                
-            break;
-                    
+                break;
             case btnEliminarPeli:
                 if (this.peli.buscarPeli(Integer.parseInt(this.elim_peli.tf_elim.getText()))) {
                     if (this.peli.eliminarPeli(Integer.parseInt(this.elim_peli.tf_elim.getText()))) {
@@ -301,12 +319,12 @@ public class Observador implements ActionListener, MouseListener {
             case btnBuscarPeli:
                 if (this.peli.buscarPeli(Integer.parseInt(this.buscar_peli.tf_buscar.getText()))) {
                     int precio = 0;
-                    //int cat = 0;
-                    //String formato, nom;
+                    int cat = 0;
+                    String formato, nom;
                     int code = Integer.parseInt(this.buscar_peli.tf_buscar.getText());                    
                     
                     precio = this.peli.buscarPorCodigo(code).get(0).getPrecio();
-                    //cat = this.peli.buscarPorCodigo(code).get(0).getId_categoria();
+                    cat = this.peli.buscarPorCodigo(code).get(0).getId_categoria();
                     formato = this.peli.buscarPorCodigo(code).get(0).getFormato4k();
                     nom = this.peli.buscarPorCodigo(code).get(0).getFormato4k();
                     String p = Integer.toString(precio);
@@ -318,7 +336,22 @@ public class Observador implements ActionListener, MouseListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró un registro!");
                 }
-
+                //Éstos son los nuevos botones de la Vista_nueva 
+                case btn_cat_drama:
+                    if (this.peli.guardarPeli(12500,10990,3,"si","película agregada a drama")){
+                        JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría drama");
+                    
+                    }else{
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
+                    }
+                case btn_cat_comedia:
+                    if (this.peli.guardarPeli(223424,5990,4,"si","película agregada a comedia")){
+                        JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría comedia");
+                    
+                    }else{
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
+                    }
+                    
                 break;
         }
     }

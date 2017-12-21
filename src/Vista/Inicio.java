@@ -35,6 +35,7 @@ public class Inicio extends javax.swing.JFrame {
         menu_elim_peli = new javax.swing.JMenuItem();
         menu_buscar_peli = new javax.swing.JMenuItem();
         menu_listar_peli = new javax.swing.JMenuItem();
+        menu_vista_nueva = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menu_agre_cat = new javax.swing.JMenuItem();
         menu_listar_cat = new javax.swing.JMenuItem();
@@ -66,6 +67,9 @@ public class Inicio extends javax.swing.JFrame {
 
         menu_listar_peli.setText("Listar Pelicula");
         jMenu2.add(menu_listar_peli);
+
+        menu_vista_nueva.setText("Vista Nueva");
+        jMenu2.add(menu_vista_nueva);
 
         jMenuBar1.add(jMenu2);
 
@@ -146,5 +150,6 @@ public class Inicio extends javax.swing.JFrame {
     public javax.swing.JMenuItem menu_listar_cat;
     public javax.swing.JMenuItem menu_listar_peli;
     public javax.swing.JMenuItem menu_salir;
+    public javax.swing.JMenuItem menu_vista_nueva;
     // End of variables declaration//GEN-END:variables
 }
