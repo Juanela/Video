@@ -215,4 +215,41 @@ public class Pelicula {
         return tablemodel;
     }
     
+    public DefaultTableModel ListadoPeliRom(){
+      DefaultTableModel tablemodel = new DefaultTableModel();
+      int registros = 0;
+      String[] columNames = {"Id","Código","Precio","Id Categoría","Formato 4k","Nombre"};
+      try{
+         Connection cnx5 = Conexion.getConexion();
+         PreparedStatement pstm = cnx5.prepareStatement( "SELECT count(*) as total FROM pelicula");
+         ResultSet res = pstm.executeQuery();
+         res.next();
+         registros = res.getInt("total");
+         res.close();
+      }catch(SQLException e){
+         System.err.println( e.getMessage() );
+      }
+      Object[][] data = new String[registros][6];
+      try{
+         Connection cnx6 = Conexion.getConexion();
+         PreparedStatement pstm = cnx6.prepareStatement("SELECT * FROM pelicula WHERE id_categoria = 2");
+         ResultSet res = pstm.executeQuery();
+         int i=0;
+         while(res.next()){
+                data[i][0] = res.getString( "id" );
+                data[i][1] = res.getString( "codigo" );
+                data[i][2] = res.getString( "precio" );
+                data[i][3] = res.getString( "id_categoria" );
+                data[i][4] = res.getString( "formato4k" );
+                data[i][5] = res.getString( "nombre" );
+            i++;
+         }
+         res.close();
+         tablemodel.setDataVector(data, columNames );
+         }catch(SQLException e){
+            System.err.println( e.getMessage() );
+        }
+        return tablemodel;
+    }
+    
 }

@@ -26,6 +26,7 @@ import Vista.Vista_listar_peli;
 import Vista.Vista_agregar_cat;
 import Vista.Vista_listar_cat;
 import Vista.Vista_nueva;
+import Vista.Vista_listar_romance;
 import java.util.ArrayList;
 
 /**
@@ -43,8 +44,9 @@ public class Observador implements ActionListener, MouseListener {
 
     private Vista_agregar_cat agregar_cat = new Vista_agregar_cat();
     private Vista_listar_cat listar_cat = new Vista_listar_cat();
-    
+
     private Vista_nueva vistaNew = new Vista_nueva();
+    private Vista_listar_romance vista_listar_rom = new Vista_listar_romance();
 
     //modelo
     private Pelicula peli = new Pelicula();
@@ -79,7 +81,6 @@ public class Observador implements ActionListener, MouseListener {
         btn_mod_nom,
         //Aquí está el nuevo botón creado para la Vista_agregar_peli
         btn_clean_casilla,
-        
 
     }
 
@@ -105,6 +106,8 @@ public class Observador implements ActionListener, MouseListener {
             SwingUtilities.updateComponentTreeUI(this.listar_cat);
             //Se agregó la Vista_nueva al Inicio(menú principal en jmenú2, menu_vista_nueva) 
             SwingUtilities.updateComponentTreeUI(this.vistaNew);
+            //Se agregó la Vista_listar_rom. 
+            SwingUtilities.updateComponentTreeUI(this.vista_listar_rom);
 
             this.vistaPrincipal.setLocationRelativeTo(null);
             this.vistaPrincipal.setTitle("Video-Buster");
@@ -134,11 +137,10 @@ public class Observador implements ActionListener, MouseListener {
         this.vistaPrincipal.menu_salir.addActionListener(this);
         this.vistaPrincipal.menu_vista_nueva.setActionCommand("btnSalir");
         this.vistaPrincipal.menu_vista_nueva.addActionListener(this);
-        
+
         //Escuchamos el nuevo el nuevo botón para la Vista_nueva
         this.vistaPrincipal.menu_vista_nueva.setActionCommand("btn_vista_nueva");
         this.vistaPrincipal.menu_vista_nueva.addActionListener(this);
-        
 
         this.agregar_cat.agrega_cat.setActionCommand("btnGuardarCat");
         this.agregar_cat.agrega_cat.addActionListener(this);
@@ -150,11 +152,11 @@ public class Observador implements ActionListener, MouseListener {
         this.listar_cat.listar_cat_volver.addActionListener(this);
         this.listar_peli.btn_volver_peli.setActionCommand("btnVolverListarPeli");
         this.listar_peli.btn_volver_peli.addActionListener(this);
-                
+
         this.agregar_peli.guardar_peli.setActionCommand("btnGuardarPeli");
         this.agregar_peli.guardar_peli.addActionListener(this);
         this.agregar_peli.btnVolver.setActionCommand("btnVolverAgregar");
-        this.agregar_peli.btnVolver.addActionListener(this); 
+        this.agregar_peli.btnVolver.addActionListener(this);
         this.agregar_peli.btn_clean_casilla.setActionCommand("btnAgregaDrama");
         this.agregar_peli.btn_clean_casilla.addActionListener(this);
         this.elim_peli.btn_elim.setActionCommand("btnEliminarPeli");
@@ -163,7 +165,7 @@ public class Observador implements ActionListener, MouseListener {
         this.elim_peli.btn_volver.addActionListener(this);
         this.buscar_peli.btnBuscar.setActionCommand("btnBuscarPeli");
         this.buscar_peli.btnBuscar.addActionListener(this);
-        
+
         //Escuhamos los nuevos botones creados para la Vista_nueva
         this.vistaNew.btn_cat_drama.setActionCommand("btn_cat_drama");
         this.vistaNew.btn_cat_drama.addActionListener(this);
@@ -178,7 +180,7 @@ public class Observador implements ActionListener, MouseListener {
         //Escuhamos el nuevo botón creados en la Vista_agregar_peli
         this.agregar_peli.btn_clean_casilla.setActionCommand("btn_clean_casilla");
         this.agregar_peli.btn_clean_casilla.addActionListener(this);
-            
+
     }
 
     @Override
@@ -266,7 +268,7 @@ public class Observador implements ActionListener, MouseListener {
             case btn_vista_nueva:
                 this.vistaNew.setVisible(true);
                 this.vistaPrincipal.setVisible(false);
-                break;      
+                break;
             case btnGuardarPeli:
                 //Enviamos datos del formulario Ingresar producto a metodo nuevoProducto
                 if (Integer.parseInt(this.agregar_peli.tf_cod.getText()) >= 10000 && Integer.parseInt(this.agregar_peli.tf_cod.getText()) <= 99999) {
@@ -300,14 +302,14 @@ public class Observador implements ActionListener, MouseListener {
                     JOptionPane.showMessageDialog(null, "El código debe ser entre 10000 y 99999!");
                 }
                 break;
-            
+
             //Este es el nuevo botón "Limpiar casilla" de la Vista_agregar_peli 
-                case btn_clean_casilla:
-                    this.agregar_peli.tf_cod.setText("");
-                    this.agregar_peli.tf_nom.setText("");
-                    this.agregar_peli.tf_price.setText("");
-                    this.agregar_peli.formato.setSelectedIndex(0);
-                    this.agregar_peli.categoria.setSelectedIndex(0);                    
+            case btn_clean_casilla:
+                this.agregar_peli.tf_cod.setText("");
+                this.agregar_peli.tf_nom.setText("");
+                this.agregar_peli.tf_price.setText("");
+                this.agregar_peli.formato.setSelectedIndex(0);
+                this.agregar_peli.categoria.setSelectedIndex(0);
                 break;
             case btnEliminarPeli:
                 if (this.peli.buscarPeli(Integer.parseInt(this.elim_peli.tf_elim.getText()))) {
@@ -326,8 +328,8 @@ public class Observador implements ActionListener, MouseListener {
                     int precio = 0;
                     int cat = 0;
                     String formato, nom;
-                    int code = Integer.parseInt(this.buscar_peli.tf_buscar.getText());                    
-                    
+                    int code = Integer.parseInt(this.buscar_peli.tf_buscar.getText());
+
                     precio = this.peli.buscarPorCodigo(code).get(0).getPrecio();
                     cat = this.peli.buscarPorCodigo(code).get(0).getId_categoria();
                     formato = this.peli.buscarPorCodigo(code).get(0).getFormato4k();
@@ -341,21 +343,28 @@ public class Observador implements ActionListener, MouseListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró un registro!");
                 }
-                //Éstos son los nuevos botones de la Vista_nueva 
-                case btn_cat_drama:
-                    if (this.peli.guardarPeli(12500,10990,3,"si","Titanic")){
-                        JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría drama");
-                    }else{
-                    JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
-                    }
-                case btn_cat_comedia:
-                    if (this.peli.guardarPeli(223424,5990,4,"si","Loc por Mery")){
-                        JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría comedia");
-                    }else{
-                    JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
-                    }
-                    
                 break;
+            //Éstos son los nuevos botones de la Vista_nueva 
+            case btn_cat_drama:
+                if (this.peli.guardarPeli(12500, 10990, 3, "si", "Titanic")) {
+                    JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría drama");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
+                }
+                break;
+            case btn_cat_comedia:
+                if (this.peli.guardarPeli(223424, 5990, 4, "si", "Loc por Mery")) {
+                    JOptionPane.showMessageDialog(null, "Se ha registrado la película categoría comedia");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar la película");
+                }
+                break;
+            case btn_list_romance:
+                this.vistaNew.setVisible(false);
+                this.vista_listar_rom.setVisible(true);                
+                this.vista_listar_rom.jt_romance.setModel(this.peli.ListadoPeliRom());
+                break;
+
         }
     }
 
